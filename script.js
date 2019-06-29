@@ -15,6 +15,7 @@ function flipCard(){
    if (!hasFlippedCard) {
    	hasFlippedCard = true;
    	firstCard = this;
+      return;
    }
    else {
    	hasFlippedCard = false;
@@ -22,27 +23,26 @@ function flipCard(){
    }
 
    checkingCard();
-   console.log(firstCard.id);
-   console.log(secondCard.id);
 };
 
 function disableCard() {
 	firstCard.removeEventListener("click", flipCard);
-   	secondCard.removeEventListener("click", flipCard);
+   secondCard.removeEventListener("click", flipCard);
 }
 
 function checkingCard() {
-   
    if (firstCard.id === secondCard.id) {
-      disableCard;
+      disableCard();
+      return;
    }
    else {
       setTimeout(function(){
          firstCard.classList.remove('is-flipped');
          secondCard.classList.remove('is-flipped');
-      }, 1500);
+      }, 700);
 
    } 
+
 }
 
 function removeCard() {
