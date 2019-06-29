@@ -11,9 +11,10 @@ cards.forEach(function(oneCard){
 
 // Перерворот карты
 function flipCard(){
-   if (lockBoard) return;
+   if (lockBoard) {
+      removeCards();
+   };
 
-// Из за следующей строчки нельзя повторно нажать на первую карту после их закрытия (пока что не знаю как исправить) 
    if (this === firstCard) return;
 
    this.classList.add('is-flipped');
@@ -46,25 +47,27 @@ function checkingCard() {
       return;
    }
    else {
-      removeCard();
+      blockCard();
    } 
 
 }
 
-function removeCard() {
+function blockCard() {
    lockBoard = true;
 
    firstCard.classList.add('wrong-card');
    secondCard.classList.add('wrong-card');
 
-   setTimeout(function(){
+
+}
+
+function removeCards(){
       firstCard.classList.remove('is-flipped');
       secondCard.classList.remove('is-flipped');
 
       lockBoard = false;
-   }, 700);
-	
 }
+
 
 function resetCards() {
    [firstCard, secondCard]=[null, null];
