@@ -27,7 +27,7 @@ body {
 	height: 120px;
 	position: relative;	
 	margin-bottom: 20px;
-
+	perspective: 1000px;
 }
 
 .front {
@@ -54,9 +54,9 @@ body {
 	align-items: center;
 	backface-visibility: hidden;
 	transition: 0.5s;
-	perspective: 1000px;
 	border: 5px solid #ffffff;
 	border-radius: 9px;
+	box-shadow: 0 0 10px #434344;
 }
 
 /*Переворот*/
