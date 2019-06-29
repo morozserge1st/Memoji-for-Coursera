@@ -2,6 +2,7 @@ const cards = document.querySelectorAll('.memory-card');
 
 
 let hasFlippedCard = false;
+let lockBoard = false;
 let firstCard, secondCard;
 
 cards.forEach(function(oneCard){
@@ -10,6 +11,9 @@ cards.forEach(function(oneCard){
 
 // Перерворот карты
 function flipCard(){
+   if (lockBoard) return;
+   if (this === firstCard) return;
+
    this.classList.add('is-flipped');
 
    if (!hasFlippedCard) {
@@ -31,23 +35,29 @@ function disableCard() {
 }
 
 function checkingCard() {
+
    if (firstCard.id === secondCard.id) {
       disableCard();
       return;
    }
    else {
-      setTimeout(function(){
-         firstCard.classList.remove('is-flipped');
-         secondCard.classList.remove('is-flipped');
-      }, 700);
-
+      removeCard();
    } 
 
 }
 
 function removeCard() {
+   lockBoard = true;
+
+   setTimeout(function(){
+      firstCard.classList.remove('is-flipped');
+      secondCard.classList.remove('is-flipped');
+
+      lockBoard = false;
+   }, 700);
 	
 }
+
 
 // Перемешивание карт, меняем порядок с помощью order
 (function mixingCards () {
