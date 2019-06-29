@@ -4,7 +4,7 @@ body {
 }
 
 .wrapper {
-	width: 540px;
+	width: 555px;
 	margin: 0 auto;
 }
 
@@ -26,7 +26,7 @@ body {
 	width: 120px;
 	height: 120px;
 	position: relative;	
-	margin-bottom: 20px;
+	margin-bottom: 25px;
 	perspective: 1000px;
 }
 
