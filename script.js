@@ -12,11 +12,13 @@ cards.forEach(function(oneCard){
 // Перерворот карты
 function flipCard(){
    if (lockBoard) return;
+
+// Из за следующей строчки нельзя повторно нажать на первую карту после их закрытия (пока что не знаю как исправить) 
    if (this === firstCard) return;
 
    this.classList.add('is-flipped');
    this.classList.remove('wrong-card');
-   
+
    if (!hasFlippedCard) {
    	hasFlippedCard = true;
    	firstCard = this;
