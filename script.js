@@ -20,7 +20,16 @@ function flipCard(){
    	hasFlippedCard = false;
    	secondCard = this;
    }
-};
+
+
+function disableCard() {
+	firstCard.removeEventListener("click", flipCard);
+   	secondCard.removeEventListener("click", flipCard);
+}
+
+function removeCard() {
+	
+}
 
 // Перемешивание карт, меняем порядок с помощью order
 (function mixingCards () {
