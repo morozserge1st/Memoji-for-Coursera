@@ -22,3 +22,11 @@ function flipCard(){
    }
 };
 
+// Перемешивание карт, меняем порядок с помощью order
+(function mixingCards () {
+	cards.forEach(function(mixCard){
+		var randomCard = Math.floor(Math.random()*12);
+   		mixCard.style.order = randomCard;
+	});
+})()
+
