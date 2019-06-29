@@ -71,8 +71,10 @@ body {
 
 .right-card .back {
 	background-color: #5ad66f;
+	border-color: #5ad66f;
 }
 
 .wrong-card .back {
 	background-color: #f44336;
+	border-color: #f44336;
 }
