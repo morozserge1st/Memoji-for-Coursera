@@ -1,8 +1,8 @@
-var cards = document.querySelectorAll('.memory-card');
+const cards = document.querySelectorAll('.memory-card');
 
 
-var hasFlippedCard = false;
-var firstCard, secondCard;
+let hasFlippedCard = false;
+let firstCard, secondCard;
 
 cards.forEach(function(oneCard){
    oneCard.addEventListener("click", flipCard);
@@ -21,22 +21,28 @@ function flipCard(){
    	secondCard = this;
    }
 
-
-   if (firstCard.dataset.emoji === secondCard.dataset.emoji) {
-   	disableCard;
-   }
-   else {
-   	setTimeout(function(){
-   		firstCard.classList.remove('is-flipped');
-   		secondCard.classList.remove('is-flipped');
-   	}, 1500);
-
-   }
+   checkingCard();
+   console.log(firstCard.id);
+   console.log(secondCard.id);
 };
 
 function disableCard() {
 	firstCard.removeEventListener("click", flipCard);
    	secondCard.removeEventListener("click", flipCard);
+}
+
+function checkingCard() {
+   
+   if (firstCard.id === secondCard.id) {
+      disableCard;
+   }
+   else {
+      setTimeout(function(){
+         firstCard.classList.remove('is-flipped');
+         secondCard.classList.remove('is-flipped');
+      }, 1500);
+
+   } 
 }
 
 function removeCard() {
