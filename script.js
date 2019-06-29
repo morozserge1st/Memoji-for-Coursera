@@ -22,6 +22,18 @@ function flipCard(){
    }
 
 
+   if (firstCard.dataset.emoji === secondCard.dataset.emoji) {
+   	disableCard;
+   }
+   else {
+   	setTimeout(function(){
+   		firstCard.classList.remove('is-flipped');
+   		secondCard.classList.remove('is-flipped');
+   	}, 1500);
+
+   }
+};
+
 function disableCard() {
 	firstCard.removeEventListener("click", flipCard);
    	secondCard.removeEventListener("click", flipCard);
