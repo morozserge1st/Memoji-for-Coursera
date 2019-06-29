@@ -68,3 +68,11 @@ body {
 .is-flipped .back {
 	transform: rotateY(360deg);
 }
+
+.right-card .back {
+	background-color: #5ad66f;
+}
+
+.wrong-card .back {
+	background-color: #f44336;
+}

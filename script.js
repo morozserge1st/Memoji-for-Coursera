@@ -15,7 +15,8 @@ function flipCard(){
    if (this === firstCard) return;
 
    this.classList.add('is-flipped');
-
+   this.classList.remove('wrong-card');
+   
    if (!hasFlippedCard) {
    	hasFlippedCard = true;
    	firstCard = this;
@@ -31,7 +32,9 @@ function flipCard(){
 
 function disableCard() {
 	firstCard.removeEventListener("click", flipCard);
+   firstCard.classList.add('right-card');
    secondCard.removeEventListener("click", flipCard);
+   secondCard.classList.add('right-card');
 }
 
 function checkingCard() {
@@ -49,6 +52,9 @@ function checkingCard() {
 function removeCard() {
    lockBoard = true;
 
+   firstCard.classList.add('wrong-card');
+   secondCard.classList.add('wrong-card');
+
    setTimeout(function(){
       firstCard.classList.remove('is-flipped');
       secondCard.classList.remove('is-flipped');
@@ -61,9 +67,12 @@ function removeCard() {
 function resetCards() {
    [firstCard, secondCard]=[null, null];
    [hasFlippedCard, lockBoard]=[false, false];
+   firstCard.classList.remove('right-card');
+   secondCard.classList.remove('right-card');
 }
 
 // Перемешивание карт, меняем порядок с помощью order
+// Применяем IIFE
 (function mixingCards () {
 	cards.forEach(function(mixCard){
 		var randomCard = Math.floor(Math.random()*12);
