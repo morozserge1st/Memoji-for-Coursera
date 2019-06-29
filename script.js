@@ -58,6 +58,10 @@ function removeCard() {
 	
 }
 
+function resetCards() {
+   [firstCard, secondCard]=[null, null];
+   [hasFlippedCard, lockBoard]=[false, false];
+}
 
 // Перемешивание карт, меняем порядок с помощью order
 (function mixingCards () {
