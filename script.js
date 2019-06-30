@@ -76,23 +76,44 @@ function resetCards() {
    secondCard.classList.remove('right-card');
 }
 
-
 let timer = document.querySelector('.timer');
 let timerOn = false;
 if (!timerOn) {
    countDown();
+
+}
+
+let i = 60;
+let time;
+
+function checkTime(){
+let secondsPerMinutes = 60;
+let seconds = i;
+let minutes = Math.floor(seconds/secondsPerMinutes);
+
+  if (minutes<10) {
+    minutes = '0'+ minutes;
+  }
+  if (seconds>60) {
+    seconds = Math.floor(i/secondsPerMinutes);
+  } 
+  if (seconds == 60){
+    seconds = '00';
+  } else if (seconds<10) {
+    seconds = '0'+ seconds;
+  }
+  time = minutes + ':' + seconds
 }
 
 function countDown() {
-   let i = 60;
-   timer.innerHTML = i;
 
    setInterval(function() {
 
+   checkTime();
       if (timerOn) return;
       
       i--;
-      timer.innerHTML = i;
+      timer.innerHTML = time;
    
       if (i <= 0) {
          timerOn = true;
@@ -100,6 +121,7 @@ function countDown() {
       };
    }, 1000);
 }
+
 
 let modalWin = document.getElementById('modal-win');
 let resetButton = document.querySelector('.notgo');
