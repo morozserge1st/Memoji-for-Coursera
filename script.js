@@ -76,6 +76,47 @@ function resetCards() {
    secondCard.classList.remove('right-card');
 }
 
+
+let timer = document.querySelector('.timer');
+let timerOn = false;
+if (!timerOn) {
+   countDown();
+}
+
+function countDown() {
+   let i = 60;
+   timer.innerHTML = i;
+
+   setInterval(function() {
+
+      if (timerOn) return;
+      
+      i--;
+      timer.innerHTML = i;
+   
+      if (i <= 0) {
+         timerOn = true;
+         openModal();
+      };
+   }, 1000);
+}
+
+let modalWin = document.getElementById('modal-win');
+let resetButton = document.querySelector('.notgo');
+
+resetButton.addEventListener("click", closeModal);
+
+
+function openModal(){
+    modalWin.style.visibility = 'visible';
+    modalWin.style.opacity = '1';
+}
+
+function closeModal(){
+    modalWin.style.visibility = 'hidden';
+    modalWin.style.opacity = '0';
+}
+
 // Перемешивание карт, меняем порядок с помощью order
 // Применяем IIFE
 (function mixingCards () {
