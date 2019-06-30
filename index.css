@@ -6,6 +6,8 @@ body {
 .wrapper {
 	width: 555px;
 	margin: 0 auto;
+	font: 42px Arial;
+	color: #434344;
 }
 
 .memory-cards-field {
@@ -17,8 +19,6 @@ body {
 
 .header{
 	margin: 40px;
-	font: 42px Arial;
-	color: #434344;
 	line-height: 47px;
 }
 
@@ -77,6 +77,12 @@ body {
 .wrong-card .back {
 	background-color: #f44336;
 	border-color: #f44336;
+}
+
+.timer {
+	margin: 5px;
+	line-height: 36px;
+	font-size: 30px;
 }
 
 #modal-win {

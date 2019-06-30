@@ -1,12 +1,27 @@
 const cards = document.querySelectorAll('.memory-card');
 
+let modalWinContent = document.querySelector('.modal-win-content')
+
+let modalWin = document.getElementById('modal-win');
+let resetButton = document.querySelector('.notgo');
+
+let timer = document.querySelector('.timer');
 
 let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
 
+let timerOff = false;
+
+let i = 6;
+let time;
+let timerOn = false;
+
+resetButton.addEventListener("click", closeModal);
+
 cards.forEach(function(oneCard){
    oneCard.addEventListener("click", flipCard);
+   oneCard.addEventListener("click", countDown);
 });
 
 // Перерворот карты
@@ -70,26 +85,24 @@ function removeCards(){
 
 
 function resetCards() {
-   [firstCard, secondCard]=[null, null];
-   [hasFlippedCard, lockBoard]=[false, false];
-   firstCard.classList.remove('right-card');
-   secondCard.classList.remove('right-card');
+  i = 6;
+  timer.innerHTML = "";
+  [firstCard, secondCard]=[null, null];
+  [hasFlippedCard, lockBoard, timerOff, timerOn]=[false, false, false, false];
+
+  cards.forEach(function(oneCard){
+    oneCard.classList.remove('right-card');
+    oneCard.classList.remove('is-flipped');
+  });
+  clearInterval(countID);
 }
 
-let timer = document.querySelector('.timer');
-let timerOn = false;
-if (!timerOn) {
-   countDown();
-
-}
-
-let i = 60;
-let time;
 
 function checkTime(){
-let secondsPerMinutes = 60;
-let seconds = i;
-let minutes = Math.floor(seconds/secondsPerMinutes);
+  let secondsPerMinutes = 60;
+  let seconds = i;
+  let minutes = Math.floor(seconds/secondsPerMinutes);
+  let countID;
 
   if (minutes<10) {
     minutes = '0'+ minutes;
@@ -102,41 +115,39 @@ let minutes = Math.floor(seconds/secondsPerMinutes);
   } else if (seconds<10) {
     seconds = '0'+ seconds;
   }
-  time = minutes + ':' + seconds
+  timer.innerHTML = minutes + ':' + seconds
 }
 
 function countDown() {
-
-   setInterval(function() {
-
-   checkTime();
-      if (timerOn) return;
-      
-      i--;
-      timer.innerHTML = time;
+  if (timerOn) return;
+  timerOn = true;
    
-      if (i <= 0) {
-         timerOn = true;
-         openModal();
-      };
+  countID = setInterval(function() {
+    if (i == 0) {
+      timerOff = true;
+      openModal();
+    };
+    checkTime();
+    if (timerOff) return;
+    i--;
    }, 1000);
 }
-
-
-let modalWin = document.getElementById('modal-win');
-let resetButton = document.querySelector('.notgo');
-
-resetButton.addEventListener("click", closeModal);
 
 
 function openModal(){
     modalWin.style.visibility = 'visible';
     modalWin.style.opacity = '1';
+    modalWinContent.innerHTML = 'Lose'; 
+    // Сделать функцию для выбора сообщения
+
 }
 
+
 function closeModal(){
+    resetCards();
     modalWin.style.visibility = 'hidden';
     modalWin.style.opacity = '0';
+
 }
 
 // Перемешивание карт, меняем порядок с помощью order
