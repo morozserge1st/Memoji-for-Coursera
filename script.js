@@ -1,9 +1,9 @@
 const cards = document.querySelectorAll('.memory-card');
 
-let modalWinContent = document.querySelector('.modal-win-content')
+let modalWinContent = document.querySelector('.modal-win-content');
+let modalWinButton = document.querySelector('.modal-win-button')
 
 let modalWin = document.getElementById('modal-win');
-let resetButton = document.querySelector('.notgo');
 
 let timer = document.querySelector('.timer');
 
@@ -19,7 +19,7 @@ let timerOn = false;
 
 let f = 0;
 
-resetButton.addEventListener("click", closeModal);
+modalWinButton.addEventListener("click", closeModal);
 
 cards.forEach(function(oneCard){
    oneCard.addEventListener("click", flipCard);
@@ -52,9 +52,10 @@ function flipCard(){
 
 function disableCard() {
   f++;
-  if (f == 6){
+  if (f == 1){
     setTimeout(openModal, 500);
-    modalWinContent.innerHTML = 'Win'; 
+    modalWinContent.innerHTML = 'Win';
+    modalWinButton.innerHTML = 'Play again'; 
   }
 
 	firstCard.removeEventListener("click", flipCard);
@@ -102,13 +103,9 @@ function resetCards() {
   });
   i = 60;
   f = 0;
-  timer.innerHTML = "";
   [firstCard, secondCard]=[null, null];
   [hasFlippedCard, lockBoard, timerOff, timerOn]=[false, false, false, false];
-
-  clearInterval(countID);
-
- console.log(hasFlippedCard, lockBoard, timerOff, timerOn);
+  setTimeout(mixingCards, 500);
 }
 
 
@@ -141,6 +138,7 @@ function countDown() {
       timerOff = true;
       openModal();
       modalWinContent.innerHTML = 'Lose'; 
+      modalWinButton.innerHTML = 'Try again';
     };
     checkTime();
     if (timerOff) return;
@@ -150,8 +148,11 @@ function countDown() {
 
 
 function openModal(){
-    modalWin.style.visibility = 'visible';
-    modalWin.style.opacity = '1';
+  modalWin.style.visibility = 'visible';
+  modalWin.style.opacity = '1';
+
+  timer.innerHTML = "";
+  clearInterval(countID);
     // Сделать функцию для выбора сообщения
 
 }
@@ -164,12 +165,18 @@ function closeModal(){
 
 }
 
+function mixingCards () {
+  cards.forEach(function(mixCard){
+    var randomCard = Math.floor(Math.random()*12);
+      mixCard.style.order = randomCard;
+  });
+}
 // Перемешивание карт, меняем порядок с помощью order
 // Применяем IIFE
 (function mixingCards () {
-	cards.forEach(function(mixCard){
-		var randomCard = Math.floor(Math.random()*12);
-   		mixCard.style.order = randomCard;
-	});
+  cards.forEach(function(mixCard){
+    var randomCard = Math.floor(Math.random()*12);
+      mixCard.style.order = randomCard;
+  });
 })()
 

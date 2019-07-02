@@ -103,11 +103,23 @@ body {
     left: 0;
     right: 0;
     margin: auto;
-    width: 80%;
-    max-width: 600px;
+    width: initial;
+    width: 350px;
     position: absolute;
-    padding: 25px;
+    padding: 30px;
     background-color: #fff;
     z-index: 1000;
-    border-radius: 3px;
+}
+
+.modal-win-content{
+	margin: 0;
+	margin-bottom: 30px;
+}
+
+.modal-win-button {
+	background: linear-gradient(#22ab93, #19668d);
+	padding: 10px 30px;
+	font: 20px Arial;
+	color: #fff;
+	border-radius: 9px;
 }
