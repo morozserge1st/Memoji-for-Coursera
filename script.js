@@ -52,7 +52,7 @@ function flipCard(){
 
 function disableCard() {
   f++;
-  if (f == 1){
+  if (f == 6){
     setTimeout(openModal, 500);
     modalWinContent.innerHTML = 'Win';
     modalWinButton.innerHTML = 'Play again'; 
@@ -106,6 +106,8 @@ function resetCards() {
   [firstCard, secondCard]=[null, null];
   [hasFlippedCard, lockBoard, timerOff, timerOn]=[false, false, false, false];
   setTimeout(mixingCards, 500);
+
+  timer.innerHTML = "";
 }
 
 
@@ -148,11 +150,12 @@ function countDown() {
 
 
 function openModal(){
-  modalWin.style.visibility = 'visible';
-  modalWin.style.opacity = '1';
 
   timer.innerHTML = "";
   clearInterval(countID);
+  modalWin.style.visibility = 'visible';
+  modalWin.style.opacity = '1';
+
     // Сделать функцию для выбора сообщения
 
 }

@@ -122,4 +122,9 @@ body {
 	font: 20px Arial;
 	color: #fff;
 	border-radius: 9px;
+	box-shadow: 1px 1px 1px #434344;
+}
+.modal-win-button:active {
+	box-shadow: inset 2px 1px 8px;
+	outline: none !important;
 }
