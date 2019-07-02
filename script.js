@@ -13,9 +13,11 @@ let firstCard, secondCard;
 
 let timerOff = false;
 
-let i = 6;
+let i = 60;
 let time;
 let timerOn = false;
+
+let f = 0;
 
 resetButton.addEventListener("click", closeModal);
 
@@ -49,10 +51,19 @@ function flipCard(){
 };
 
 function disableCard() {
+  f++;
+  if (f == 6){
+    setTimeout(openModal, 500);
+    modalWinContent.innerHTML = 'Win'; 
+  }
+
 	firstCard.removeEventListener("click", flipCard);
    firstCard.classList.add('right-card');
    secondCard.removeEventListener("click", flipCard);
    secondCard.classList.add('right-card');
+   cards.forEach(function(oneCard){
+    oneCard.addEventListener("click", flipCard);
+  });
 }
 
 function checkingCard() {
@@ -85,16 +96,19 @@ function removeCards(){
 
 
 function resetCards() {
-  i = 6;
-  timer.innerHTML = "";
-  [firstCard, secondCard]=[null, null];
-  [hasFlippedCard, lockBoard, timerOff, timerOn]=[false, false, false, false];
-
   cards.forEach(function(oneCard){
     oneCard.classList.remove('right-card');
     oneCard.classList.remove('is-flipped');
   });
+  i = 60;
+  f = 0;
+  timer.innerHTML = "";
+  [firstCard, secondCard]=[null, null];
+  [hasFlippedCard, lockBoard, timerOff, timerOn]=[false, false, false, false];
+
   clearInterval(countID);
+
+ console.log(hasFlippedCard, lockBoard, timerOff, timerOn);
 }
 
 
@@ -126,6 +140,7 @@ function countDown() {
     if (i == 0) {
       timerOff = true;
       openModal();
+      modalWinContent.innerHTML = 'Lose'; 
     };
     checkTime();
     if (timerOff) return;
@@ -137,7 +152,6 @@ function countDown() {
 function openModal(){
     modalWin.style.visibility = 'visible';
     modalWin.style.opacity = '1';
-    modalWinContent.innerHTML = 'Lose'; 
     // Сделать функцию для выбора сообщения
 
 }
